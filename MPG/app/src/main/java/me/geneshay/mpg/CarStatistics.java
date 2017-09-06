@@ -1,30 +1,95 @@
 package me.geneshay.mpg;
-
 /**
- * Created by geneshay on 8/28/17.
+ * simple CarStatistics class to store data on a per car basis
+ * the class contains update and get methods
  */
 
-public class CarStatistics {
+import android.util.Log;
 
-    private double milesRecorded = 0.0;
+public class CarStatistics {
+    private double startingMileage = 0.0;
+    private double lastRecordedMileage = 0.0;
+    private double milesTracked = 0.0;
+    private double totalMoneySpent = 0.0;
+    private double totalGallonsFilled = 0.0;
     private double averageMPGallon = 0.0;
     private double averageMPDollar = 0.0;
+    private double averageGallonCost = 0.0;
 
-    public void addMiles(double recordedMiles){
-        milesRecorded += recordedMiles;
+    private static final String TAG = "CarStatistics";
+    //method to record the original milage
+    public void setStartingMilage(double startingMilageReading){
+        startingMileage = startingMilageReading;
+        lastRecordedMileage = startingMilageReading;
     }
 
-    public void updateMPGallon(double recordedGallons, double recordedMiles){
-        averageMPGallon += recordedMiles/recordedGallons;
-        milesRecorded += recordedMiles;
+    //-------------start update methods-------------
+    public void updateMetrics(double newCarMilage, double amountSpent, double gallonsFilled){
+        if(startingMileage > 0.0){
+            addMiles(newCarMilage);
+            addMoneySpent(amountSpent);
+            addGalonsFilled(gallonsFilled);
+            updateMPGallon();
+            updateMPDollar();
+            Log.i(TAG, "Updated car metrics");
+        }
+        else{
+            setStartingMilage(newCarMilage);
+            Log.i(TAG, "No previous mileage records, only set starting mileage.");
+        }
     }
 
-    public void updateMPDollar(double recordedPPGalon){
-        averageMPDollar += recordedPPGalon;
+    //---------------start private add methods---------
+    private void addMiles(double newCarMilage){
+        milesTracked += newCarMilage - lastRecordedMileage;
+        Log.i(TAG, "" +milesTracked);
     }
 
-    public double getMilesRecorded(){
-        return milesRecorded;
+    private void addMoneySpent(double amountSpent){
+        totalMoneySpent += amountSpent;
+        Log.i(TAG, "" + totalMoneySpent);
+    }
+
+    private void addGalonsFilled(double galonsFilled){
+        totalGallonsFilled += galonsFilled;
+        Log.i(TAG, "" + totalGallonsFilled);
+    }
+
+    //----------------start public update methods------
+    public void updateMPGallon(){
+        if(milesTracked > 0.0 && totalGallonsFilled > 0.0){
+            averageMPGallon = milesTracked/totalGallonsFilled;
+        }
+    }
+
+    public void updateMPDollar(){
+        if(milesTracked > 0.0 && totalMoneySpent > 0.0){
+            averageMPDollar = milesTracked/totalMoneySpent;
+        }
+    }
+
+    public void updateAverageGalonCost(){
+        if(milesTracked > 0.0 && totalMoneySpent > 0.0){
+            averageGallonCost = totalMoneySpent/totalGallonsFilled;
+        }
+    }
+
+    //-------------start get methods-------------------
+
+    public double getMilesTracked(){
+        return milesTracked;
+    }
+
+    public double getLastRecordedMilage(){
+        return lastRecordedMileage;
+    }
+
+    public double getTotalMoneySpent(){
+        return totalMoneySpent;
+    }
+
+    public double getTotalGalonsFilled(){
+        return totalGallonsFilled;
     }
 
     public double getAverageMPGallon(){

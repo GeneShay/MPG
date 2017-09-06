@@ -1,16 +1,14 @@
 package me.geneshay.mpg;
 
-import android.os.SystemClock;
+import android.util.Log;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import me.geneshay.mpg.CarStatistics;
 import android.view.View.OnClickListener;
 
 
-import org.w3c.dom.Text;
-
+import java.io.FileOutputStream;
 import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,23 +18,33 @@ public class MainActivity extends AppCompatActivity {
     TextView milesTotal;
     CarStatistics carStatistics = new CarStatistics();
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        try {
+            FileOutputStream fOut = openFileOutput("car_statistics", MODE_WORLD_READABLE);
+
+        }
+        catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         mpgTotal = (TextView) findViewById(R.id.mpgTotal);
         milesPerDollarTotal = (TextView) findViewById(R.id.milesPerDollarTotal);
         milesTotal = (TextView) findViewById(R.id.milesTotal);
 
         updateStatisticsPage();
 
+        carStatistics.setStartingMilage(5);
+
         findViewById(R.id.cmdUpdateData).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                carStatistics.updateMPGallon(5.3,21.6);
-                carStatistics.updateMPDollar(20);
-                updateStatisticsPage();
+                setContentView(R.layout.fillout_form);
             }
             }
         );
@@ -47,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
         mpgTotal.setText(decimalFormat.format(carStatistics.getAverageMPGallon()));
         milesPerDollarTotal.setText(decimalFormat.format(carStatistics.getAverageMPDollar()));
-        milesTotal.setText(decimalFormat.format(carStatistics.getMilesRecorded()));
+        milesTotal.setText(decimalFormat.format(carStatistics.getMilesTracked()));
     }
+
 }

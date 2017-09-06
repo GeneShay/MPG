@@ -1,0 +1,96 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fillout_form"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id = "@+id/intro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="UPDATE INFORMATION"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="75dp"
+        android:textSize="30dp"/>
+
+    <TextView
+        android:id="@+id/mileage"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="Current Mileage:"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="50dp"
+        android:layout_below="@id/intro"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/gallons"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="Gallons Filled:"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="50dp"
+        android:layout_below="@id/mileage"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/cost"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="Total Cost:"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="50dp"
+        android:layout_below="@id/gallons"
+        android:textSize="20dp"/>
+
+    <EditText
+        android:id="@+id/mpgTotal"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:inputType="numberDecimal"
+        android:hint="NO DATA"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="50dp"
+        android:layout_below="@id/intro"
+        android:textSize="20dp"/>
+
+    <EditText
+        android:id="@+id/milesPerDollarTotal"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:inputType="numberDecimal"
+        android:hint="NO DATA"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="50dp"
+        android:layout_below="@id/mpgTotal"
+        android:textSize="20dp"/>
+
+    <EditText
+        android:id="@+id/milesTotal"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:inputType="numberDecimal"
+        android:hint="NO DATA"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="50dp"
+        android:layout_below="@id/milesPerDollarTotal"
+        android:textSize="20dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="CALCULATE"
+        android:id="@+id/cmdCalculate"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/milesTotal"
+        android:layout_marginTop="15dp"/>
+
+
+
+</RelativeLayout>
