@@ -7,8 +7,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 
-
-import java.io.FileOutputStream;
 import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,14 +23,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        try {
-            FileOutputStream fOut = openFileOutput("car_statistics", MODE_WORLD_READABLE);
-
-        }
-        catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
         mpgTotal = (TextView) findViewById(R.id.mpgTotal);
         milesPerDollarTotal = (TextView) findViewById(R.id.milesPerDollarTotal);
         milesTotal = (TextView) findViewById(R.id.milesTotal);
